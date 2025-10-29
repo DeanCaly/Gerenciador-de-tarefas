@@ -12,4 +12,4 @@ with sqlite3.connect(db_file) as con:
     print(f"Banco de dados {db_file} e tabela task criados com sucesso!")
 
 
-
+    
