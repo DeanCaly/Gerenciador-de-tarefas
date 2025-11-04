@@ -4,7 +4,7 @@ DATABASE = "tasks.db"
 
 def add_tasks(titulo: str, descrissao: str) -> None: 
     
-    sql_insert = """INSERT INTO tasks (titulo, descrissao, status) (VALUES ?, ?)"""
+    sql_insert = """INSERT INTO tasks (titulo, descricao) VALUES (?, ?)"""
     data_to_insert = (titulo, descrissao)
 
     #separação entre código a ser inserido e conexão com o banco de dados
@@ -28,7 +28,8 @@ def get_all_tasks():
         all_tasks = res.fetchall()
 
 
-    return all_tasks
+        return [dict(task) for task in all_tasks]
+
 
 def update_task_status(task_id: int, new_status: int) -> None:
     sql_insert = "UPDATE tasks SET status = ? WHERE id = ?"
@@ -41,6 +42,7 @@ def update_task_status(task_id: int, new_status: int) -> None:
 
         print("Status da tarefa modificado com sucesso")
 
+
     
 def delete_task(task_id) -> None:
     sql_insert = "DELETE FROM tasks WHERE titulo = ?"
@@ -51,3 +53,20 @@ def delete_task(task_id) -> None:
         cursor.execute(sql_insert, data_to_insert)
 
         print(f"Tarefa com id {task_id} deletada com sucesso")
+
+
+
+
+if __name__ =="__main__": 
+    """
+    add_tasks("estudos", "estudar sobre Sqlite3")
+    add_tasks("Revisão", "revisão de funções em javascript")
+
+    update_task_status("1", "1")
+    
+
+    print("-=-=-= Lista de tarefas =-=-=-=")
+    minhas_tarefas = get_all_tasks()
+    print(minhas_tarefas)
+    print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+    """
